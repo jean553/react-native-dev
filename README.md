@@ -25,14 +25,8 @@ expo init MyProject
 Into your new project directory:
 
 ```sh
-REACT_NATIVE_PACKAGER_HOSTNAME=your_lan_ip_address npm start
+npm start
 ```
-
-Note that you have to set the variable `REACT_NATIVE_PACKAGER_HOSTNAME`
-with your host LAN IP address.
-
-This is required so the `Expo` mobile app can find your server on your LAN,
-by default, `npm` will start with your container IP address, which is not visible from your mobile on your LAN.
 
 ## Run your app with Expo
 
