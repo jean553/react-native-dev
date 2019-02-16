@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
   config.ssh.insert_key = false
   config.vm.define "dev", primary: true do |app|
     app.vm.provider "docker" do |d|
-      d.image = "react-native-dev"
+      d.image = "jean553/react-native-dev"
       d.name = "#{PROJECT}_dev"
       d.has_ssh = true
       d.env = {
