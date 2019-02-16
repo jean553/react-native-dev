@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  become: true
+
+  tasks:
+
+    - name: required packages installed
+      apt:
+        name="{{ item }}"
+        state=present
+        update_cache=yes
+      with_items:
+        - vim
+        - zsh
+        - wget
+        - git
+        - curl
+        - npm
