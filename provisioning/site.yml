@@ -16,3 +16,9 @@
         - git
         - curl
         - npm
+
+    - name: expo-cli installed
+      npm:
+        name: expo-cli
+        state: present
+        global: yes
