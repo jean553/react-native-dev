@@ -22,3 +22,14 @@
         name: expo-cli
         state: present
         global: yes
+
+    - name: oh-my-zsh repository cloned
+      git:
+        repo=git://github.com/robbyrussell/oh-my-zsh.git
+        dest=/root/.oh-my-zsh
+
+    - name: oh-my-zsh default configuration generated
+      command: cp /root/.oh-my-zsh -r /home/vagrant/.oh-my-zsh
+
+    - name: zsh default configuration generated
+      command: cp /root/.oh-my-zsh/templates/zshrc.zsh-template /home/vagrant/.zshrc
