@@ -19,4 +19,7 @@ Vagrant.configure(2) do |config|
     end
     app.ssh.username = "vagrant"
   end
+  config.vm.network "forwarded_port", guest: 19000, host: 19010
+  config.vm.network "forwarded_port", guest: 19001, host: 19011
+  config.vm.network "forwarded_port", guest: 19002, host: 19012
 end
