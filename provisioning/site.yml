@@ -23,6 +23,12 @@
         state: present
         global: yes
 
+    - name: react-native-cli installed
+      npm:
+        name: react-native-cli
+        state: present
+        global: yes
+
     - name: oh-my-zsh repository cloned
       git:
         repo=git://github.com/robbyrussell/oh-my-zsh.git
