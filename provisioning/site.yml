@@ -4,6 +4,16 @@
 
   tasks:
 
+    - name: apt key for yarn installation added
+      apt_key:
+        url: https://dl.yarnpkg.com/debian/pubkey.gpg
+        state: present
+
+    - name: yarn repository added
+      apt_repository:
+        repo: deb https://dl.yarnpkg.com/debian/ stable main
+        state: present
+
     - name: required packages installed
       apt:
         name="{{ item }}"
@@ -16,18 +26,11 @@
         - git
         - curl
         - npm
+        - yarn
 
     - name: expo-cli installed
-      npm:
-        name: expo-cli
-        state: present
-        global: yes
-
-    - name: react-native-cli installed
-      npm:
-        name: react-native-cli
-        state: present
-        global: yes
+      command: yarn global add expo-cli
+      become_user: vagrant
 
     - name: oh-my-zsh repository cloned
       git:
