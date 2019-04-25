@@ -42,3 +42,15 @@
 
     - name: zsh default configuration generated
       command: cp /root/.oh-my-zsh/templates/zshrc.zsh-template /home/vagrant/.zshrc
+
+    - name: expo command line tool made available
+      lineinfile:
+        path: /home/vagrant/.zshrc
+        line: 'echo "export PATH=$PATH:/home/vagrant/.yarn/bin" >> /home/vagrant/.zshrc'
+        create: yes
+
+    - name: zsh configuration file permissions set
+      file:
+        path: /home/vagrant/.zshrc
+        owner: vagrant
+        group: vagrant
