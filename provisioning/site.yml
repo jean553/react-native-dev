@@ -54,3 +54,8 @@
         path: /home/vagrant/.zshrc
         owner: vagrant
         group: vagrant
+
+    - name: vim configuration set
+      copy:
+        src: "roles/vim/files/vimrc"
+        dest: /home/vagrant/.vimrc
