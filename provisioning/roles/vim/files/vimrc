@@ -1,40 +1,7 @@
-filetype plugin on
-set paste
-set nocompatible
-syntax on
-
-autocmd BufRead *.cpp set autoindent
-autocmd BufRead *.h set autoindent
-
 set tabstop=4
-set softtabstop=4
+filetype plugin indent on
+set tabstop=4
 set shiftwidth=4
-set smarttab
 set expandtab
-set smartindent
-set number
-set colorcolumn=80
-set laststatus=2
-set wildmode=longest,full
-set nobackup       "no backup file
-set nowritebackup  "only in case you don't want a backup file while editing
-set noswapfile     "no swap file
-set mouse=a
-set autochdir
-set showcmd
-set cursorline
-set hlsearch
-
-colorscheme torte
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -Wall'
-let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
-
-execute pathogen#infect()
+syntax on
+colorscheme desert
