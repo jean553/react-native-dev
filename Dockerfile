@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile
-FROM unilynx/phusion-baseimage-1804:1.0.0
+FROM phusion/baseimage:jammy-1.0.1
 
 ENV SUDOFILE /etc/sudoers
 
@@ -7,7 +7,7 @@ COPY change_user_uid.sh /
 
 # install ansible
 RUN apt-get update -y && \
-    apt-get install ansible sudo -y
+    apt-get install ansible sudo ssh -y
 
 # ssh configuration for Vagrant usage
 RUN \
@@ -18,7 +18,7 @@ RUN \
         --shell /bin/zsh \
         --create-home --base-dir /home \
         --user-group \
-        --groups sudo,ssh \
+        --groups sudo,_ssh \
         --password '' \
         vagrant && \
     mkdir -p /home/vagrant/.ssh && \
