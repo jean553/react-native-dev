@@ -16,17 +16,9 @@
 
     - name: required packages installed
       apt:
-        name="{{ item }}"
-        state=present
-        update_cache=yes
-      with_items:
-        - vim
-        - zsh
-        - wget
-        - git
-        - curl
-        - npm
-        - yarn
+        name: ['vim', 'zsh', 'wget', 'git', 'curl', 'npm', 'yarn']
+        state: present
+        update_cache: yes
 
     - name: expo-cli installed
       command: yarn global add expo-cli
@@ -34,7 +26,7 @@
 
     - name: oh-my-zsh repository cloned
       git:
-        repo=git://github.com/robbyrussell/oh-my-zsh.git
+        repo=https://github.com/robbyrussell/oh-my-zsh.git
         dest=/root/.oh-my-zsh
 
     - name: oh-my-zsh default configuration generated
