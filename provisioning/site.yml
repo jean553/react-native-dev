@@ -16,7 +16,7 @@
 
     - name: required packages installed
       apt:
-        name: ['vim', 'zsh', 'wget', 'git', 'curl', 'npm', 'yarn']
+        name: ['vim', 'zsh', 'wget', 'git', 'curl', 'npm', 'yarn', 'adb']
         state: present
         update_cache: yes
 
