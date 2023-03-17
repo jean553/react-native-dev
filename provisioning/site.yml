@@ -78,3 +78,13 @@
       apt:
         name: nodejs
         state: present
+
+    - name: corepack enabled
+      shell:
+        cmd: corepack enable
+
+    - name: yarn latest version installed
+      shell:
+        cmd: corepack prepare yarn@stable --activate
+      become: true
+      become_user: vagrant
