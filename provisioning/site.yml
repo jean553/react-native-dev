@@ -94,3 +94,4 @@
         name: eas-cli
         global: true
         state: present
+        become: true
