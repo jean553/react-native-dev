@@ -88,3 +88,9 @@
         cmd: corepack prepare yarn@stable --activate
       become: true
       become_user: vagrant
+
+    - name: eas installed
+      npm:
+        name: eas-cli
+        global: true
+        state: present
