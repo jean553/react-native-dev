@@ -20,6 +20,33 @@
         state: present
         update_cache: yes
 
+    - name: default nodejs version removed
+      apt:
+        name: ['nodejs']
+        state: absent
+        update_cache: yes
+        purge: true
+
+    - name: gpg key for nodejs 18 LTS installed
+      apt_key:
+        url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+        state: present
+
+    - name: nodejs 19 LTS repo configured
+      apt_repository:
+        repo: "deb https://deb.nodesource.com/node_19.x jammy main"
+        state: present
+        update_cache: yes
+
+    - name: Remove dependencies that are no longer required
+      apt:
+        autoremove: yes
+
+    - name: nodejs 18 LTS installed
+      apt:
+        name: nodejs
+        state: present
+
     - name: expo-cli installed
       command: yarn global add expo-cli
       become_user: vagrant
@@ -51,33 +78,6 @@
       copy:
         src: "roles/vim/files/vimrc"
         dest: /home/vagrant/.vimrc
-
-    - name: default nodejs version removed
-      apt:
-        name: ['nodejs']
-        state: absent
-        update_cache: yes
-        purge: true
-
-    - name: gpg key for nodejs 18 LTS installed
-      apt_key:
-        url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
-        state: present
-
-    - name: nodejs 18 LTS repo configured
-      apt_repository:
-        repo: "deb https://deb.nodesource.com/node_18.x jammy main"
-        state: present
-        update_cache: yes
-
-    - name: Remove dependencies that are no longer required
-      apt:
-        autoremove: yes
-
-    - name: nodejs 18 LTS installed
-      apt:
-        name: nodejs
-        state: present
 
     - name: corepack enabled
       shell:
