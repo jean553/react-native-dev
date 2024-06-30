@@ -6,7 +6,8 @@ ENV SUDOFILE /etc/sudoers
 COPY change_user_uid.sh /
 
 # install ansible
-RUN apt-get update -y && \
+RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install ansible sudo ssh -y
 
 # ssh configuration for Vagrant usage
