@@ -27,22 +27,22 @@
         update_cache: yes
         purge: true
 
-    - name: gpg key for nodejs 18 LTS installed
-      apt_key:
-        url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
-        state: present
-
-    - name: nodejs 19 LTS repo configured
-      apt_repository:
-        repo: "deb https://deb.nodesource.com/node_19.x jammy main"
-        state: present
-        update_cache: yes
-
     - name: Remove dependencies that are no longer required
       apt:
         autoremove: yes
 
-    - name: nodejs 18 LTS installed
+    - name: nodejs 22 is downloaded
+      get_url:
+        url: https://deb.nodesource.com/setup_22.x
+        dest: /tmp/nodesource_setup.sh
+        mode: '0111'
+
+    - name: nodejs 22 installation is configured
+      shell:
+        cmd: /tmp/nodesource_setup.sh
+      become: yes
+
+    - name: nodejs 22 LTS installed
       apt:
         name: nodejs
         state: present
