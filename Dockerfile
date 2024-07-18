@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile
-FROM phusion/baseimage:jammy-1.0.1
+FROM phusion/baseimage:noble-1.0.0
 
 ENV SUDOFILE /etc/sudoers
 
