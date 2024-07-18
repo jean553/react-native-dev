@@ -14,6 +14,11 @@
         repo: deb https://dl.yarnpkg.com/debian/ stable main
         state: present
 
+    - name: os upgraded
+      apt:
+        upgrade: yes
+        update_cache: yes
+
     - name: required packages installed
       apt:
         name: ['vim', 'zsh', 'wget', 'git', 'curl', 'npm', 'yarn', 'adb']
