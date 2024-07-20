@@ -1,5 +1,11 @@
 # vim:set ft=dockerfile
-FROM phusion/baseimage:noble-1.0.0
+
+# on July 2024, switching to noble (24.04 LTS) causes issues
+# because it will mount the volume on "vagrant up" with default user "ubuntu"
+# instead of the expected one "vagrant"
+#
+# this cause rights and privileges issues for all commands coming after
+FROM phusion/baseimage:jammy-1.0.0
 
 ENV SUDOFILE /etc/sudoers
 
