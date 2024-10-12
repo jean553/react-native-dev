@@ -2,7 +2,7 @@
 
 # Base image selection
 # We use phusion/baseimage:jammy-1.0.0 as it provides a minimal Ubuntu-based image
-# Note: As of July 2024, using noble (24.04 LTS) causes issues with user permissions
+# Note: As of July 2023, using noble (24.04 LTS) causes issues with user permissions
 FROM phusion/baseimage:jammy-1.0.0
 
 # Set environment variable for sudoers file location
