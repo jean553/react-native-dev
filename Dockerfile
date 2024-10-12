@@ -14,7 +14,7 @@ COPY change_user_uid.sh /
 # Update system and install required packages
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install ansible ssh -y
+    apt-get install ssh -y
 
 # Configure SSH for Vagrant usage
 RUN \
@@ -39,9 +39,6 @@ RUN \
     echo '%sudo   ALL=(ALL:ALL) NOPASSWD: ALL' >> ${SUDOFILE} && \
     chmod u-w ${SUDOFILE}
 
-# Copy provisioning files and run Ansible playbook
-COPY provisioning/ provisioning
-RUN ansible-playbook provisioning/site.yml -c local
 
 # Make the UID change script executable
 RUN chmod +x /change_user_uid.sh
