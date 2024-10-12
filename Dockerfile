@@ -14,7 +14,7 @@ COPY change_user_uid.sh /
 # Update system and install required packages
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install ansible sudo ssh -y
+    apt-get install ansible ssh -y
 
 # Configure SSH for Vagrant usage
 RUN \
