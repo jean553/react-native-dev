@@ -1,0 +1,40 @@
+
+## Run your app with Expo
+
+1. Install Expo Go on your mobile device:
+   - [Android Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)
+   - [iOS App Store](https://apps.apple.com/app/expo-go/id982107779)
+
+2. Open Expo Go on your device and tap on "Scan QR code".
+
+3. Scan the QR code displayed in your terminal or in the Expo Developer Tools.
+
+Your app should now load on your device.
+
+## Monitoring / Debugging
+
+Open `http://localhost:19002` in your browser to access the Expo Developer Tools interface. This provides various options for monitoring and debugging your app.
+
+## Using it with Vagrant
+
+The provided Vagrantfile includes configurations for port forwarding and setting up the development environment. Here are some key points:
+
+- Port 19000, 19001, and 19002 are forwarded from the guest to the host.
+- The container uses the `jean553/react-native-dev` Docker image.
+- The `REACT_NATIVE_PACKAGER_HOSTNAME` is automatically set to your local IP address.
+
+## Additional Tips
+
+- To add dependencies to your project, use `yarn add` or `npm install` within the project directory.
+- The development environment includes Zsh with Oh My Zsh for an enhanced command-line experience.
+- Vim is pre-configured with some basic settings for easier coding.
+
+## Troubleshooting
+
+If you encounter any issues with the setup or running your React Native app, please check the following:
+
+1. Ensure all prerequisites are installed and up to date.
+2. Verify that the required ports (19000, 19001, 19002) are not being used by other applications.
+3. If you're having network issues, make sure your mobile device and development machine are on the same Wi-Fi network.
+
+For more detailed information on React Native development with Expo, refer to the [official Expo documentation](https://docs.expo.dev/).
