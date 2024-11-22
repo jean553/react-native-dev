@@ -1,81 +1,57 @@
 # react-native-dev
 
-A Vagrant/Docker ready project for React Native development.
+A Vagrant/Docker environment for React Native development with Expo.
 
-## Build the container
+## Overview
 
-```sh
-vagrant up
-```
+This project provides a ready-to-use development environment for React Native using Vagrant and Docker. It simplifies the setup process and ensures a consistent development experience across different machines.
 
-## Connect to the container
+## Prerequisites
 
-```sh
-vagrant ssh
-```
+- Vagrant
+- Docker
+- (Optional) Expo mobile app for testing on a physical device
 
-## Create your project
+## Getting Started
 
-```sh
-expo init MyProject
-```
+### Build the Container
 
-## Start your project
+To set up your development environment, run:
 
-Into your new project directory:
+### Connect to the Container
 
-```sh
-npm start
-```
+## Creating a New Project
 
-## Run your app with Expo
+## Running Your Project
 
-Install Expo on your mobile from [here](https://play.google.com/store/apps/details?id=host.exp.exponent).
+## Using Expo
 
-Open Expo and click on `Scan QR code`. Scan your server QR code.
+1. Install the Expo app on your mobile device from the [Google Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent) or the Apple App Store.
+2. Open the Expo app on your device.
+3. Scan the QR code displayed in your terminal or in the Expo Developer Tools.
 
-You're ready to go.
+Your app should now run on your mobile device.
 
-## Monitoring / Debugging
+## Monitoring & Debugging
 
-Open `localhost:19002` on your browser in order to render the Expo Developer Tools interface.
+Access the Expo Developer Tools interface by opening `http://localhost:19002` in your web browser. This provides various debugging and monitoring options for your app.
+
+## Project Structure
+
+The project includes:
+
+- `Dockerfile`: Defines the Docker image for the development environment.
+- `Vagrantfile`: Configures the Vagrant setup and Docker provider.
+- `provisioning/`: Contains Ansible playbooks for setting up the environment.
 
 ## Using it with Vagrant
 
-```ruby
+The `Vagrantfile` includes configuration for setting up the development environment. It handles port forwarding, environment variables, and initial setup. Refer to the Vagrantfile for details on customization options.
 
-# get your local IP address
-REACT_NATIVE_PACKAGER_HOSTNAME = Socket.ip_address_list.find { |ai| ai.ipv4? && !ai.ipv4_loopback? }.ip_address
+## Contributing
 
-...
+Contributions to improve this development environment are welcome. Please feel free to submit issues or pull requests.
 
-config.ssh.insert_key = false
-config.vm.define "dev", primary: true do |app|
-  app.vm.provider "docker" do |d|
-    d.image = "jean553/react-native-dev"
-    d.name = "#{PROJECT}_dev"
-    d.has_ssh = true
-    d.env = {
-      "HOST_USER_UID" => Process.euid,
-    }
-  end
-  app.ssh.username = "vagrant"
-end
-config.vm.network "forwarded_port", guest: 19000, host: 19000
-config.vm.network "forwarded_port", guest: 19001, host: 19001
-config.vm.network "forwarded_port", guest: 19002, host: 19002
+## License
 
-config.vm.provision "set_lan_ip", "type": "shell", privileged: false do |installs|
-  installs.inline = "
-
-
-    # ensure Expo looks for your host IP address into your LAN
-    cd /vagrant/#{PROJECT_NAME}
-    echo 'export REACT_NATIVE_PACKAGER_HOSTNAME=#{REACT_NATIVE_PACKAGER_HOSTNAME} npm start  && cd /vagrant/#{PROJECT_NAME}' | sudo tee --append /home/vagrant/.zshrc
-
-    # add dependencies here
-    yarn add native-base --save
-    yarn add react-navigation
-  "
-end
-```
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
