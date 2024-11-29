@@ -1,22 +1,29 @@
 # vim:set ft=dockerfile
 
-# on July 2024, switching to noble (24.04 LTS) causes issues
-# because it will mount the volume on "vagrant up" with default user "ubuntu"
-# instead of the expected one "vagrant"
-#
-# this cause rights and privileges issues for all commands coming after
+# This Dockerfile sets up a development environment for React Native
+
+# Base image selection
+# Using Ubuntu 22.04 LTS (Jammy) for stability
+# Note: Upgrading to Ubuntu 24.04 (Noble) causes user-related issues
 FROM phusion/baseimage:jammy-1.0.0
 
+# Define sudo file path for later use
 ENV SUDOFILE /etc/sudoers
 
+# Copy the UID change script into the container
+# This script is used to match the container user's UID with the host user's UID
 COPY change_user_uid.sh /
 
-# install ansible
+# Install essential tools:
+# - ansible: for provisioning the container
+# - sudo: for privilege escalation
+# - ssh: for Vagrant to connect to the container
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install ansible sudo ssh -y
 
-# ssh configuration for Vagrant usage
+# Configure SSH for Vagrant usage
+# This setup allows Vagrant to connect to the container as if it were a VM
 RUN \
     rm -f /etc/service/sshd/down && \
     echo 'PermitEmptyPasswords yes' >> /etc/ssh/sshd_config && \
@@ -34,10 +41,16 @@ RUN \
     echo '%sudo   ALL=(ALL:ALL) NOPASSWD: ALL' >> ${SUDOFILE} && \
     chmod u-w ${SUDOFILE}
 
-# build the image using the ansible steps
+# Copy and run Ansible provisioning scripts
+# These scripts set up the React Native development environment
+# They are located in the ./provisioning directory of the project
 COPY provisioning/ provisioning
 RUN ansible-playbook provisioning/site.yml -c local
 
+# Set up the entrypoint script
+# This script adjusts the container user's UID to match the host user's UID
 RUN chmod +x /change_user_uid.sh
 ENTRYPOINT /change_user_uid.sh
+
+# Set the default command to run when the container starts
 CMD ["/sbin/my_init"]
