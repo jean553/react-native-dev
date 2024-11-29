@@ -1,32 +1,38 @@
 # react-native-dev
 
+## Summary
+
+This project provides a Vagrant and Docker-based development environment for React Native applications. It simplifies the setup process for developers by offering a pre-configured container with all necessary tools and dependencies. The environment includes Expo for easy mobile app development and testing, along with network configurations to enable seamless integration between the development container and the host machine.
+
+---
+
 A Vagrant/Docker ready project for React Native development.
 
 ## Build the container
 
-```sh
+sh
 vagrant up
-```
+
 
 ## Connect to the container
 
-```sh
+sh
 vagrant ssh
-```
+
 
 ## Create your project
 
-```sh
+sh
 expo init MyProject
-```
+
 
 ## Start your project
 
 Into your new project directory:
 
-```sh
+sh
 npm start
-```
+
 
 ## Run your app with Expo
 
@@ -42,7 +48,7 @@ Open `localhost:19002` on your browser in order to render the Expo Developer Too
 
 ## Using it with Vagrant
 
-```ruby
+ruby
 
 # get your local IP address
 REACT_NATIVE_PACKAGER_HOSTNAME = Socket.ip_address_list.find { |ai| ai.ipv4? && !ai.ipv4_loopback? }.ip_address
@@ -78,4 +84,4 @@ config.vm.provision "set_lan_ip", "type": "shell", privileged: false do |install
     yarn add react-navigation
   "
 end
-```
+
